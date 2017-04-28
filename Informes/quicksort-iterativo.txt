@@ -1,0 +1,75 @@
+console.log("QuickSort Iterativo");
+var listaOrig = new Array();
+
+construirArrayAleatorio(31000000, 1, 50000000);
+console.log("Lista Original: "+ listaOrig);
+var startTime = new Date();
+qsort(listaOrig);
+var endTime = new Date();
+var tiempo = (endTime-startTime)/1000;
+console.log("Tiempo de ejecución: "+tiempo+" segundos");
+
+/*construye array aleatorio de datos*/
+function construirArrayAleatorio(cantidad, min, max){
+  var ltemp = new Array();
+  for(i=0; i<cantidad; i++){
+    var item = Math.floor(Math.random()*(max - min))+min;
+    ltemp.push(item);
+  }
+  listaOrig = ltemp;
+}
+
+/*funcion de ordenamiento rapido iterativo*/
+function qsort(arr)
+{
+    var stack = [arr];
+    var sorted = [];
+ 
+    while (stack.length) {
+ 
+        var temp = stack.pop(), tl = temp.length;
+ 
+        if (tl == 1) {
+            sorted.push(temp[0]);
+            continue;
+        }
+        var pivot = temp[0];
+        var left = [], right = [];
+ 
+        for (var i = 1; i < tl; i++) {
+            if (temp[i] < pivot) {
+                left.push(temp[i]);
+            } else {
+                right.push(temp[i]);
+            }
+        }
+        left.push(pivot);
+ 
+        if (right.length)
+            stack.push(right);
+        if (left.length)
+            stack.push(left);
+ 
+    }
+    console.log("Lista Ordenada: "+sorted);
+}
+/*
+Exception: InternalError: allocation size overflow
+@Scratchpad/6:5:1
+*/
+/*
+Exception: InternalError: allocation size overflow
+@Scratchpad/8:5:1
+*/
+/*
+Exception: InternalError: allocation size overflow
+@Scratchpad/8:5:1
+*/
+/*
+Exception: InternalError: allocation size overflow
+@Scratchpad/8:5:1
+*/
+/*
+Exception: InternalError: allocation size overflow
+@Scratchpad/8:5:1
+*/

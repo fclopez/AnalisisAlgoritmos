@@ -1,0 +1,91 @@
+console.log("QuickSort Numeros aleatorios");
+var listaOrig = new Array();
+
+/*1ra variante*/
+construirArrayAleatorio(30000000, 1, 40000000);
+console.log("qs original: "+ listaOrig);
+var startTime1 = new Date();
+console.log("qs recursivo 1: "+quicksortBasic(listaOrig.slice())); 
+var endTime1 = new Date();
+var tiempo1 = (endTime1-startTime1)/1000;
+console.log("Tiempo de ejecución 1: "+tiempo1+" segundos");
+
+/*2da variante*/
+construirArrayAleatorio(30000000, 1, 40000000);
+console.log("qs original: "+ listaOrig);
+var startTime2 = new Date();
+console.log("qs recursivo 2: "+quicksort(listaOrig.slice()));
+var endTime2 = new Date();
+var tiempo2 = (endTime2-startTime2)/1000;
+console.log("Tiempo de ejecución 2: "+tiempo2+" segundos");
+
+
+/*genera una lista de numeros aleatoria*/
+function construirArrayAleatorio(cantidad, min, max){
+  var ltemp = new Array();
+  for(i=0; i<cantidad; i++){
+    var item = Math.floor(Math.random()*(max - min))+min;
+    ltemp.push(item);
+  }
+  listaOrig = ltemp;
+}
+
+/*1ra funcion recursiva quicksort*/
+function quicksortBasic(array) {
+  if(array.length < 2) {
+    return array;
+  }
+
+  var pivot = array[0];
+  var lesser = [];
+  var greater = [];
+
+  for(var i = 1; i < array.length; i++) {
+    if(array[i] < pivot) {
+      lesser.push(array[i]);
+    } else {
+      greater.push(array[i]);
+    }
+  }
+  return quicksortBasic(lesser).concat(pivot, quicksortBasic(greater));
+}
+
+/*2da funcion recursiva quicksort*/
+function quicksort(array, left, right) {
+  
+  left = left || 0;
+  right = right || array.length - 1;
+  
+  var pivot = partition(array, left, right);
+
+  if(left < pivot - 1) {
+    quicksort(array, left, pivot - 1);
+  }
+  if(right > pivot) {
+    quicksort(array, pivot, right);
+  }
+  return array;
+}
+
+/*funcion de intercambio*/
+function swap(array, i, j) {
+  var temp = array[i];
+  array[i] = array[j];
+  array[j] = temp;
+}
+
+/*funcion de particionado*/
+function partition(array, left, right) {
+  var pivot = right;
+  var i = left;
+
+  for(var j = left; j < right; j++) {
+    if(array[j] <= array[pivot]) {
+      swap(array, i , j);
+      i = i + 1;
+    }
+  }
+  swap(array, i, j);
+  return i;
+}
+
