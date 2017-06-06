@@ -1,0 +1,43 @@
+var matriz = [[0,1,0,0,0,0,0,0], [1,0,0,0,1,1,0,0], [0,0,0,1,1,0,0,0], [0,0,1,0,0,0,1,0], [0,1,1,0,0,0,0,0], [0,1,0,0,0,0,1,0], [0,0,0,1,0,1,0,0], [0,0,0,0,0,0,0,0]];
+var lista =[[1],[0,4,5],[3,4],[2,6],[1,2],[1,6],[3,5],[0]];
+var aristas =[[0,1],[1,0],[1,4],[1,5],[2,3],[2,4],[3,2],[3,6],[4,1],[4,2],[5,1],[5,6],[6,3],[6,5]];
+var visitado = [];
+//recursivoMatrizDFS(0);
+//recursivoListaDFS(0);
+//recursivoAristaDFS(0);
+
+function recursivoAristaDFS(nodoini){
+  visitado[nodoini] = true;
+  console.log(nodoini);
+  //debugger;
+  for(var i=0; i<aristas.length; i++){
+    if(aristas[i][0]==nodoini && !visitado[aristas[i][1]]){
+      visitado[aristas[i][1]] = true;
+      recursivoAristaDFS(aristas[i][1]);
+    }
+  }
+}
+
+function recursivoListaDFS(nodoini){
+  visitado[nodoini] = true;
+  console.log(nodoini);
+  //debugger;
+  for(var i=0; i<lista[nodoini].length; i++){
+    if(!visitado[lista[nodoini][i]]){
+      visitado[lista[nodoini][i]] = true;
+      recursivoListaDFS(lista[nodoini][i]);
+    }
+  }
+}
+
+function recursivoMatrizDFS(nodoini){
+  visitado[nodoini] = true;
+  console.log(nodoini);
+  //debugger;
+  for(var i=0; i<matriz[nodoini].length; i++){
+    if(matriz[nodoini][i] ==1 && !visitado[i]){
+      visitado[i] = true;
+      recursivoMatrizDFS(i);
+    }
+  }
+}
